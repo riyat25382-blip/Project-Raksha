@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, MapPin, AlertCircle, X, Send, Clock, Users, CheckCircle2, Share2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Phone, MapPin, AlertCircle, X, Send, Clock, Users, CheckCircle2, Share2, ArrowLeft } from 'lucide-react'
 
 const SOSAlert = () => {
   const [sosActive, setSosActive] = useState(false)
@@ -134,21 +135,37 @@ const SOSAlert = () => {
       </div>
 
       {/* ── Main Content ── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-8">
+        {/* ── Navigation ── */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8"
+        >
+          <Link 
+            to="/dashboard" 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#610c27]/10 border border-[#610c27]/20 text-[#e3c1b4] hover:bg-[#610c27]/20 transition-all group"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <span className="text-sm font-semibold uppercase tracking-wider">Back to Dashboard</span>
+          </Link>
+        </motion.div>
+
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12 text-center"
+          className="mb-8 md:mb-12 text-center"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="text-5xl">🆘</div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+            <div className="text-4xl md:text-5xl">🆘</div>
             <div>
-              <h1 className="text-5xl lg:text-6xl font-bold font-display text-[#efece9] italic tracking-tighter">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-display text-[#efece9] italic tracking-tighter">
                 Emergency <span className="text-[#e3c1b4]">SOS</span>
               </h1>
-              <p className="text-[#ac9c8d] text-lg mt-2 font-light">
+              <p className="text-[#ac9c8d] text-base md:text-lg mt-2 font-light">
                 One-tap emergency alert system
               </p>
             </div>
@@ -162,18 +179,18 @@ const SOSAlert = () => {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16"
         >
-          <div className="bg-gradient-to-br from-[#1a0a12] to-[#0f0508] border border-[#610c27]/30 rounded-3xl p-12 shadow-2xl text-center">
-            <p className="text-[#ac9c8d] text-sm uppercase tracking-widest font-semibold mb-8">
+          <div className="bg-gradient-to-br from-[#1a0a12] to-[#0f0508] border border-[#610c27]/30 rounded-3xl p-6 md:p-12 shadow-2xl text-center">
+            <p className="text-[#ac9c8d] text-xs md:text-sm uppercase tracking-widest font-semibold mb-8">
               Press and Hold to Activate Emergency
             </p>
 
-            <div className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-6 md:gap-8">
               {/* SOS Button */}
               <motion.button
                 onClick={handleSOSToggle}
                 whileHover={!sosActive ? { scale: 1.05 } : {}}
                 whileTap={{ scale: 0.98 }}
-                className={`relative w-40 h-40 rounded-full text-6xl font-bold transition-all duration-300 shadow-2xl flex items-center justify-center ${
+                className={`relative w-32 h-32 md:w-40 md:h-40 rounded-full text-4xl md:text-6xl font-bold transition-all duration-300 shadow-2xl flex items-center justify-center ${
                   sosActive
                     ? 'bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 animate-pulse'
                     : 'bg-gradient-to-br from-[#610c27] to-[#822d43] hover:from-[#822d43] hover:to-[#a83d52]'
