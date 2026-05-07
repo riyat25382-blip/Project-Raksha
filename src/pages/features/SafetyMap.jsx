@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, AlertCircle, Phone, Navigation, Eye, Heart, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { MapPin, AlertCircle, Phone, Navigation, Eye, Heart, X, ArrowLeft } from 'lucide-react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -217,21 +218,37 @@ const SafetyMap = () => {
       </div>
 
       {/* ── Main Content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-8">
+        {/* ── Navigation ── */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8"
+        >
+          <Link 
+            to="/dashboard" 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#610c27]/10 border border-[#610c27]/20 text-[#e3c1b4] hover:bg-[#610c27]/20 transition-all group"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <span className="text-sm font-semibold uppercase tracking-wider">Back to Dashboard</span>
+          </Link>
+        </motion.div>
+
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12"
+          className="mb-8 md:mb-12"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="text-5xl">🗺️</div>
+          <div className="flex flex-col sm:flex-row items-center gap-3 mb-4 text-center sm:text-left">
+            <div className="text-4xl md:text-5xl">🗺️</div>
             <div>
-              <h1 className="text-5xl lg:text-6xl font-bold font-display text-[#efece9] italic tracking-tighter">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-display text-[#efece9] italic tracking-tighter">
                 Safety <span className="text-[#e3c1b4]">Map</span>
               </h1>
-              <p className="text-[#ac9c8d] text-lg mt-2 font-light">
+              <p className="text-[#ac9c8d] text-base md:text-lg mt-2 font-light">
                 Real-time safety zones and emergency services near you
               </p>
             </div>
